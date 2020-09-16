@@ -26,17 +26,19 @@ var style=['bold','italic']
         if(Math.round(Math.random())){
             context.rotate(angle)
         }
-        fontSize=Math.random()*(15)+20
+        fontSize=Math.random()*(10)+25;
         fontName=fonts[Math.floor(Math.random()*fonts.length)];
         color=colors[Math.floor(Math.random()*colors.length)];
         style=Math.round(Math.random());
         scaleX=Math.random()*0.5+1;
         scaleY=Math.random()*0.5+0.8;
-        context.font = style+' '+fontSize+"px "+fontName;
+        console.log(scaleX,scaleY);
+
         if(Math.round(Math.random())){
             context.save();
             context.scale(scaleX, scaleY);
             context.fillStyle=color;
+            context.font = style+' '+fontSize+"px "+fontName;
             context.fillText(captcha[i], 0, 0);
             context.restore();
             newx+=24;
@@ -44,13 +46,13 @@ var style=['bold','italic']
         }
         else{
             context.lineWidth=Math.random()*0.5+1
-            context.strokeStyle=color
+            context.strokeStyle=color;
+            context.font = style+' '+fontSize+"px "+fontName;
             context.strokeText(captcha[i],0,0);
             newx+=22;
     
         }
         context.restore();
-        console.log(newx);
       }
   }
   genCaptcha()
@@ -59,7 +61,6 @@ document.getElementById('refresh').addEventListener('click',function(){
 })
 document.getElementById('submit').addEventListener('click',function(){
     input=document.getElementById('input').value
-    console.log(input);
     if(ans==input){
         document.getElementById('status').innerHTML='Captcha Valid';
         document.getElementById('input').value='';
